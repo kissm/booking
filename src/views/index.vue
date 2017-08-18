@@ -1,0 +1,44 @@
+<template>
+	<div class="mobile">
+  <!--header 开始-->
+  <header>
+    <div class="header">
+      <h2>场地类型</h2>
+      <div class="head_right"> <a class="user" href="record.html"> </a> </div>
+    </div>
+  </header>
+  <!--header 结束--> 
+  <!--main-->
+  <div class="index-main">
+  	<a href="tel:+15757856627" class="phone-line"><i class="icon-phone"></i>15757856627</a>
+  	<div class="qiuc">
+  		<img src="images/CDtaiQ.png">
+  		<a class="changdi" href="booking.html">
+  			<h3>会议室</h3>
+  			<p>开放时间：9:00-24:00</p>
+  		</a>
+  	</div>
+  	<div class="qiuc">
+  		<img src="images/CDyuMao.png">
+  		<a class="changdi" href="booking.html">
+  			<h3>篮球场</h3>
+  			<p>开放时间：9:00-24:00</p>
+  		</a>
+  	</div>
+  	<div class="qiuc">
+  		<img src="images/CDpingP.png">
+  		<a class="changdi" href="booking.html">
+  			<h3>瑜伽房</h3>
+  			<p>开放时间：9:00-24:00</p>
+  		</a>
+  	</div>
+  </div>
+  <!--main-->
+</div>
+</template>
+
+<script>
+//	$(document).ready(function(){
+//		$(".qiuc").addClass("hover");
+//	});
+</script>
