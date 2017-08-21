@@ -10,10 +10,8 @@ import 'mint-ui/lib/style.css'
 
 import './assets/css/base.css'
 import './assets/css/style.css'
-import './assets/css/mobiscroll.2.13.2.css'
-import './assets/js/jquery-1.9.1.js'
-import './assets/js/jquery-scrollLock.min.js'
-import './assets/js/mobiscroll.2.13.2.js'
+// import './assets/css/swiper-3.4.2.min.css'
+// import './assets/js/jquery-1.9.1.js'
 // import './assets/js/swiper-3.4.2.jquery.min.js'
 
 Vue.config.productionTip = false

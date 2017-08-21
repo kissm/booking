@@ -85,13 +85,7 @@ i.position-ico2{width:16px;height:36px;background:url(../img/iconfont-weizhi_xia
 .select-message .img-list .img-box{display:block;width:100%;height:0;padding-bottom:70.83%;overflow:hidden;}
 .img-box>img{display:block;width:100%;}
 
-.bookmessage{padding:10px 10px 0;background:#fff;font-size:14px;color:#333;}
-.bookmessage .position-ico2+span{position:relative;top:-12px;}
-.bookmessage .state {
-    position: absolute;
-    right: 10px;
-     color: #757575;}
-/*预定�?*/
+/*预定*/
 .timebtn{width:100%;height:100%;border:0;font-size:14px;}
 /**********0612修改**********/
 .icoItem li{padding:0;}
@@ -189,7 +183,7 @@ i.position-ico2{width:16px;height:36px;background:url(../img/iconfont-weizhi_xia
 .bggrey{background-color:#e2e2e2;}
 li .bgwhite{background-color:#fff;}
 li .bgchecked{background-color:#8fc31f;}
-/*支付�*/
+/*支付*/
 ul.device{position:relative;margin-left:5em;margin-top:-32px;}
 .device .add,.device .reduce{width:20px;line-height:18px;text-align:center;border:1px solid #dbdbdb;}
 .device .add a,.device .reduce a{color:#999;font-size:18px;}

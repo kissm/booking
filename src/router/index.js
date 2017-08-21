@@ -22,6 +22,11 @@ export default new Router({
             path: '/selectSpot',
             name: 'selectSpot',
             component: Select
+        },
+        {
+            path: '/booking',
+            name: 'booking',
+            component: require('../views/booking.vue')
         }
     ]
 })

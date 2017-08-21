@@ -21,6 +21,14 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 var proxyTable = config.dev.proxyTable
 
 var app = express()
+var appRoutes = express.Router()
+appRoutes.get('/getImgList', function (req, res) {
+    res.json({
+        code: 200,
+        data: ['../static/cd.png','../static/cd.png','../static/timg.jpg']
+    })
+})
+app.use('/api', appRoutes)
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
