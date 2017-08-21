@@ -38,7 +38,23 @@
 </template>
 
 <script>
-//	$(document).ready(function(){
-//		$(".qiuc").addClass("hover");
-//	});
+//    import api from '../api'
+    export default {
+        data(){
+            return{
+
+			}
+		},
+		created(){
+            this.show();
+		},
+		methods:{
+		    show:function () {
+                $(document).ready(function(){
+					$(".qiuc").addClass("hover");
+				});
+            }
+		}
+	}
+
 </script>

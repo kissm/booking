@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Select from '../views/selectSpot'
 import Index from '../views/index'
 
 Vue.use(Router)
@@ -16,6 +17,11 @@ export default new Router({
             path: '/index',
             name: 'index',
             component: Index
+        },
+        {
+            path: '/selectSpot',
+            name: 'selectSpot',
+            component: Select
         }
     ]
 })
