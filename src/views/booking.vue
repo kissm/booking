@@ -281,15 +281,15 @@
             <footer class="fixedFooter">
                 <div class="bottomBtn">
                     <div class="btn">
-                        <a class="yellow" id="order">立即预定</a>
+                        <a class="yellow" id="order" @click="certifyTcShow">立即预定</a>
                     </div>
                 </div>
             </footer>
             <!--main-->
             <div style="height:54px;"></div>
         </div>
-        <div class="Tc certifyTc" style="display:none;">
-            <div class="mengban"></div>
+        <div class="Tc certifyTc" v-show="certifyTc">
+            <div class="mengban" @click="certifyTcHide"></div>
             <div class="tcCon">
                 <form class="form">
                     <div class="input-box">
@@ -300,13 +300,13 @@
                         <label>验证码</label>
                         <input type="text" placeholder="输入验证码" id="certifycode" class="input certifycode">
                         <div class="btn-box">
-                            <input type="button" class="btn" value="获取验证码" onclick="clickButton(this)"/>
+                            <input type="button" class="btn" value="获取验证码" :disabled="disable" @click="getCertifyCode"/>
                         </div>
                     </div>
                 </form>
                 <p class="text">请输入联系方式，以便于我们即使与您联系 </p>
                 <div class="footer-box">
-                    <a class="sure" href="pay.html">确定</a>
+                    <a class="sure" @click.stop="certifyTcSure">确定</a>
                 </div>
             </div>
         </div>
@@ -324,6 +324,8 @@
                 dots:[],
                 swiper: null,
                 initPage: 0,
+                certifyTc: false,
+                disable: false,
             }
         },
         created() {
@@ -341,13 +343,6 @@
                 $(".slide .slide-area").width(ulW);
                 $(".slide ul").width(ulW);
             });
-            $("#order").on("click", function () {
-                var tc = $(".certifyTc");
-                tc.show();
-                tc.find(".sure").on("click", function () {
-                    tc.hide();
-                })
-            })
         },
         components: {
           slider
@@ -359,6 +354,29 @@
             },
             swiperHide() {
                 this.swiper_tc = false;
+            },
+            certifyTcShow() {
+                this.certifyTc = true;
+            },
+            certifyTcHide() {
+                this.certifyTc = false;
+            },
+            certifyTcSure() {
+                this.certifyTc = false;
+            },
+            getCertifyCode(e) {
+                this.disable = true;
+                let time = 60;/*等待时间*/
+                let _this = this;
+                let set = setInterval(function() {
+                    e.target.value = --time + "(s)";
+                    console.log(time)
+                    if(time == 0) {
+                        clearInterval(set);
+                        _this.disable = false;
+                        e.target.value = '重新获取验证码'
+                    }
+                }, 1000);
             }
         },
     }
