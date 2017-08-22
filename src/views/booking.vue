@@ -306,7 +306,7 @@
                 </form>
                 <p class="text">请输入联系方式，以便于我们即使与您联系 </p>
                 <div class="footer-box">
-                    <a class="sure" href="pay.html">确定</a>
+                    <a class="sure" href="pay">确定</a>
                 </div>
             </div>
         </div>

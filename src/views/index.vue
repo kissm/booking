@@ -3,6 +3,7 @@
   <!--header 开始-->
   <header>
     <div class="header">
+		<a class="new-a-back" href="javascript:history.back();"> <i class="icon-fanhui"></i> </a>
       <h2>场地类型</h2>
       <div class="head_right"> <a class="user" href="record"> </a> </div>
     </div>
