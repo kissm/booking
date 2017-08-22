@@ -125,7 +125,7 @@ i.position-ico2{width:16px;height:36px;background:url(../img/iconfont-weizhi_xia
 .order-time{text-align:right;width:100%;line-height:1.5em;margin-top:5px;color:#999;font-size:13px;}
 .tcCon{width:88%;position:fixed;top:50%;left:50%;background:#fff;z-index:999;transform: translate(-50%,-50%);-webkit-transform: translate(-50%,-50%);}
 .tcCon h3{width:100%;margin:20px auto 8px;line-height:1.4em;text-align:center;font-size:16px;color:#333;}
-.tcCon .text{/*margin:0 10%;*/font-size:14px;color:#7f7f7f;margin-bottom:20px;text-align:center;}
+.tcCon .text{/*margin:0 10%;*/font-size:14px;color:#7f7f7f;/*margin-bottom:20px;*/text-align:center;}
 .tcCon a.btn{width:50%;float:left;line-height:36px;text-align:center;border-top:1px solid #dbdbdb;border-right:1px solid #dbdbdb;box-sizing: border-box;}
 .tcCon textarea{width:80%;margin-left:10%;height:80px;-webkit-appearance: none;padding-top:4px;text-indent:1em;border-color:#dbdbdb;}
 .certifyTc .tcCon{border-radius:4px;}
@@ -257,4 +257,5 @@ from {width:0}
 to {width:50%;}
 }
 
-
+.spinner{position:absolute;top:37%;margin-left:44%;}
+.mint-msgbox-confirm{font-size:16px;}

@@ -281,7 +281,7 @@
             <footer class="fixedFooter">
                 <div class="bottomBtn">
                     <div class="btn">
-                        <a class="yellow" id="order" @click="certifyTcShow">立即预定</a>
+                        <a class="yellow" id="order" @click="booking">立即预定</a>
                     </div>
                 </div>
             </footer>
@@ -294,17 +294,18 @@
                 <form class="form">
                     <div class="input-box">
                         <label>手机号</label>
-                        <input type="text" placeholder="输入手机号码" class="input">
+                        <input type="text" placeholder="输入手机号码" v-model="phone" class="input">
                     </div>
                     <div class="input-box">
                         <label>验证码</label>
-                        <input type="text" placeholder="输入验证码" id="certifycode" class="input certifycode">
+                        <input type="text" placeholder="输入验证码" id="certifycode" v-model="certifycode" class="input certifycode">
                         <div class="btn-box">
                             <input type="button" class="btn" value="获取验证码" :disabled="disable" @click="getCertifyCode"/>
                         </div>
                     </div>
                 </form>
                 <p class="text">请输入联系方式，以便于我们即使与您联系 </p>
+                <mt-spinner type="snake" :size="30" color="#ff7109" class="spinner" v-show="spinner"></mt-spinner>
                 <div class="footer-box">
                     <a class="sure" @click.stop="certifyTcSure">确定</a>
                 </div>
@@ -316,75 +317,100 @@
 <script type="text/ecmascript-6">
     import slider from '../components/slider.vue'
     import api from '../utils/api'
+    import {MessageBox, Spinner} from 'mint-ui'
+
     export default {
         data() {
             return {
                 swiper_tc: false,
                 imgList: [],
-                dots:[],
+                dots: [],
                 swiper: null,
                 initPage: 0,
                 certifyTc: false,
                 disable: false,
+                spinner: false,
+                phone: '',
+                certifycode: '',
             }
         },
         created() {
-            let _this = this;
-            console.log()
+            let _this = this
+            // 从url获取信息
             api.getImgList().then(response => {
-                this.imgList = response.data;
+                this.imgList = response.data
             })
         },
         mounted() {
             $('.slide').each(function () {
-                var slideLiW = $(".slide .time-list li").width();
-                var slideLiN = $(this).find(".time-list").find("li").length;
-                var ulW = (slideLiW + 1) * slideLiN;
-                $(".slide .slide-area").width(ulW);
-                $(".slide ul").width(ulW);
-            });
+                var slideLiW = $(".slide .time-list li").width()
+                var slideLiN = $(this).find(".time-list").find("li").length
+                var ulW = (slideLiW + 1) * slideLiN
+                $(".slide .slide-area").width(ulW)
+                $(".slide ul").width(ulW)
+            })
         },
         components: {
-          slider
+            slider
         },
         methods: {
             swiperShow(index) {
-                this.initPage = index;
-                this.swiper_tc = true;
+                this.initPage = index
+                this.swiper_tc = true
             },
             swiperHide() {
-                this.swiper_tc = false;
+                this.swiper_tc = false
             },
-            certifyTcShow() {
-                this.certifyTc = true;
+            booking() {
+                if(true) { // 如果已经选择了场地
+                    this.certifyTc = true
+                }
             },
             certifyTcHide() {
-                this.certifyTc = false;
-            },
-            certifyTcSure() {
-                this.certifyTc = false;
+                this.certifyTc = false
             },
             getCertifyCode(e) {
-                this.disable = true;
-                let time = 60;/*等待时间*/
-                let _this = this;
-                let set = setInterval(function() {
-                    e.target.value = --time + "(s)";
-                    console.log(time)
-                    if(time == 0) {
-                        clearInterval(set);
-                        _this.disable = false;
-                        e.target.value = '重新获取验证码'
-                    }
-                }, 1000);
-            }
+                let phoneReg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/
+                if (!phoneReg.test(this.phone)) {
+                    MessageBox('提示', '请填写正确的手机号')
+                    return false
+                } else {
+                    this.disable = true
+                    let time = 60
+                    /*等待时间*/
+                    let _this = this
+                    this.timer = setInterval(function () {
+                        e.target.value = --time + "(s)"
+//                        console.log(time)
+                        if (time == 0) {
+                            clearInterval(_this.timer)
+                            _this.disable = false
+                            e.target.value = '重新获取验证码'
+                        }
+                    }, 1000)
+                    //调用获取验证码接口
+                }
+            },
+            certifyTcSure() {
+                if(!this.certifycode) {
+                    MessageBox('提示', '请输入验证码')
+                    return false
+                }
+                this.spinner = true
+                //调用验证接口
+                setTimeout(() => {
+                    this.certifyTc = false
+                    clearInterval(this.timer)
+                    //跳转
+                },3000)
+            },
         },
     }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
-.slider-wrapper
-    position: relative
-    width: 100%
-    top: 20%
-    overflow: hidden
+    .slider-wrapper
+        position: relative
+        width: 100%
+        top: 20%
+        overflow: hidden
 </style>
