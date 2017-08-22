@@ -27,6 +27,11 @@ export default new Router({
             path: '/booking',
             name: 'booking',
             component: require('../views/booking.vue')
+        },
+        {
+            path: '/pay',
+            name: 'pay',
+            component: require('../views/pay.vue')
         }
     ]
 })
