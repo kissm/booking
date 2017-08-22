@@ -4,7 +4,7 @@
   <header>
     <div class="header">
       <h2>场地介绍</h2>
-      <div class="head_right"> <a class="user" href="record.html"> </a> </div>
+      <div class="head_right"> <a class="user" href="record"> </a> </div>
     </div>
   </header>
   <!--header 结束-->  
