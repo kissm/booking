@@ -75,7 +75,7 @@ i.position-ico2{width:16px;height:36px;background:url(../img/iconfont-weizhi_xia
 .appoint .total{color:#ff4061;font-size:16px;}
 .appoint .aBtn{box-sizing:border-box;width:30%;float:right;background-color:#ff7200;color:#fff;font-size:18px;}
 
-.select-message{width:100%;position:fixed;left:0;bottom:35px;box-sizing: border-box;padding:0 10px 10px;background:#fff;box-shadow: 0 0 3px rgba(0,0,0,.15);}
+.select-message{width:100%;position:fixed;left:0;bottom:35px;box-sizing: border-box;padding:10px;background:#fff;box-shadow: 0 0 3px rgba(0,0,0,.15);}
 .select-message h3{font-size:16px;color:#333;margin-top:5px;}
 .select-message ul{display:flex;flex-wrap: wrap;font-size:14px;color:#757575;}
 .select-message .text-list li{width:50%;}
@@ -85,7 +85,7 @@ i.position-ico2{width:16px;height:36px;background:url(../img/iconfont-weizhi_xia
 .select-message .img-list .img-box{display:block;width:100%;height:0;padding-bottom:70.83%;overflow:hidden;}
 .img-box>img{display:block;width:100%;}
 
-/*预定*/
+/*预定�?*/
 .timebtn{width:100%;height:100%;border:0;font-size:14px;}
 /**********0612修改**********/
 .icoItem li{padding:0;}
@@ -123,9 +123,9 @@ i.position-ico2{width:16px;height:36px;background:url(../img/iconfont-weizhi_xia
 .tabCon li .btn:active,.bottomBtn .btn a:active{background:#f1f1f1;}
 .tabCon .bookDetail{width:100%;display:block;}
 .order-time{text-align:right;width:100%;line-height:1.5em;margin-top:5px;color:#999;font-size:13px;}
-.tcCon{width:80%;position:fixed;top:50%;left:50%;background:#fff;z-index:999;transform: translate(-50%,-50%);-webkit-transform: translate(-50%,-50%);}
+.tcCon{width:88%;position:fixed;top:50%;left:50%;background:#fff;z-index:999;transform: translate(-50%,-50%);-webkit-transform: translate(-50%,-50%);}
 .tcCon h3{width:100%;margin:20px auto 8px;line-height:1.4em;text-align:center;font-size:16px;color:#333;}
-.tcCon .text{margin:0 10%;font-size:14px;color:#7f7f7f;margin-bottom:20px;}
+.tcCon .text{/*margin:0 10%;*/font-size:14px;color:#7f7f7f;margin-bottom:20px;text-align:center;}
 .tcCon a.btn{width:50%;float:left;line-height:36px;text-align:center;border-top:1px solid #dbdbdb;border-right:1px solid #dbdbdb;box-sizing: border-box;}
 .tcCon textarea{width:80%;margin-left:10%;height:80px;-webkit-appearance: none;padding-top:4px;text-indent:1em;border-color:#dbdbdb;}
 .certifyTc .tcCon{border-radius:4px;}
@@ -177,13 +177,13 @@ i.position-ico2{width:16px;height:36px;background:url(../img/iconfont-weizhi_xia
 .item-list .radio:checked + .trigger{ color:#fff; background:#8fc31f;height:43px; }
 .item-list .radio:checked + .trigger p{ color:#fff}
 .item-list .radio:checked + .trigger p.money span{color:#fff;} 
-.colorTip{padding:0 5%;position:fixed;left:0;right:0;bottom:70px;}
+.colorTip{padding:35px 5%;position:fixed;left:0;right:0;}
 .colorTip li{width:33%;float:left;line-height:20px;}
 .colorTip li i{width:40px;height:20px;border:1px solid #dbdbdb;float:left;margin-right:10px;}
 .bggrey{background-color:#e2e2e2;}
 li .bgwhite{background-color:#fff;}
 li .bgchecked{background-color:#8fc31f;}
-/*支付*/
+/*支付�*/
 ul.device{position:relative;margin-left:5em;margin-top:-32px;}
 .device .add,.device .reduce{width:20px;line-height:18px;text-align:center;border:1px solid #dbdbdb;}
 .device .add a,.device .reduce a{color:#999;font-size:18px;}
