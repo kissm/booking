@@ -381,7 +381,7 @@
                     let _this = this
                     this.timer = setInterval(function () {
                         e.target.value = --time + "(s)"
-//                        console.log(time)
+                        console.log(time)
                         if (time == 0) {
                             clearInterval(_this.timer)
                             _this.disable = false
@@ -401,7 +401,7 @@
                 setTimeout(() => {
                     this.certifyTc = false
                     clearInterval(this.timer)
-                    //跳转
+                    this.$router.push('pay')
                 },3000)
             },
         },
