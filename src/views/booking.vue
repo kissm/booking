@@ -271,7 +271,7 @@
             </div>
             <div class="swiper-tc" v-if="swiper_tc" @click="swiperHide">
                 <div class="slider-wrapper" v-if="imgList.length">
-                    <slider>
+                    <slider :initPage="initPage">
                         <div v-for="img in imgList">
                             <img :src="img">
                         </div>
@@ -323,9 +323,7 @@
                 imgList: [],
                 dots:[],
                 swiper: null,
-                loop: false,
-                autoPlay: false,
-                currentIndex: 0
+                initPage: 0,
             }
         },
         created() {
@@ -356,6 +354,7 @@
         },
         methods: {
             swiperShow(index) {
+                this.initPage = index;
                 this.swiper_tc = true;
             },
             swiperHide() {

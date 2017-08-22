@@ -20,6 +20,10 @@
             }
         },
         props: {
+            initPage: { // 用第几页作为初始页
+                type: Number,
+                default: 0
+            },
             loop: { // 是否循环播放
                 type: Boolean,
                 default: true
@@ -75,6 +79,7 @@
                 if(this.loop && !isResize) { // 如果循环播放的话，复制一个，width*2
                     width += 2 * sliderWidth
                 }
+                this.width = width
                 this.$refs.sliderGroup.style.width = width + "px"
             },
             _initDots() {
@@ -84,6 +89,11 @@
                 /**
                  * 初始化slider
                  */
+                let page = this.initPage;
+                this.currentIndex = page;
+                if (this.loop) {
+                    page += 1;
+                }
                 this.slider = new BScroll(this.$refs.slider, {
                     scrollX: true,
                     scrollY: false,
@@ -92,13 +102,15 @@
                     snapLoop: this.loop,// 是否可以无缝循环轮播
                     snapThreshold: 0.3, //  用手指滑动时页面可切换的阈值，大于这个阈值可以滑动的下一页
                     snapSpeed: 400,     // 轮播图切换的动画时间
-                })
+                });
+                this.slider.scrollTo(- page * this.$refs.slider.clientWidth, 0);
                 //滚动结束时触发
                 this.slider.on('scrollEnd', () => {
                     /**
                      * 当 snap 为 true 时，获取滚动的当前页，返回的对象结构为 {x, y, pageX, pageY},
                      * 其中 x,y 代表滚动横向和纵向的位置；pageX，pageY 表示横向和纵向的页面索引
                      */
+//                    console.log(this.slider.getCurrentPage().x);
                     let pageIndex = this.slider.getCurrentPage().pageX
                     if (this.loop) {
                         pageIndex -= 1
@@ -153,7 +165,5 @@
                 border-radius: 50%
                 background: rgba(255, 255, 255, 0.5)
                 &.active
-                    width: 20px
-                    border-radius: 5px
-                    background: rgba(255, 255, 255, 0.8)
+                    background: #007aff
 </style>
