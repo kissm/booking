@@ -318,7 +318,7 @@
 
 <script type="text/ecmascript-6">
   import api from '../utils/api'
-
+  import { MessageBox } from 'mint-ui'
   export default {
     data() {
       return {
