@@ -251,13 +251,13 @@
                 <h3>基本信息</h3>
                 <ul class="text-list">
                     <li>
-                        场地信息<span>85㎡</span>
+                        场地信息<span>{{spotInfo.square}}㎡</span>
                     </li>
                     <li>
-                        可容纳<span>50人</span>
+                        可容纳<span>{{spotInfo.hold}}人</span>
                     </li>
                     <li>
-                        收费标准<span>60元/人</span>
+                        收费标准<span>{{spotInfo.fee_type | fee(spotInfo.fee)}}</span>
                     </li>
                 </ul>
                 <h3>现场图</h3>
@@ -318,11 +318,13 @@
 
 <script type="text/ecmascript-6">
   import api from '../utils/api'
-  import { MessageBox } from 'mint-ui'
+  import {MessageBox} from 'mint-ui'
+
   export default {
     data() {
       return {
         swiper_tc: false,
+        spotInfo: {},
         imgList: [],
         swiper: null,
         certifyTc: false,
@@ -335,16 +337,17 @@
     created() {
       let _this = this
       // 从url获取信息
-      api.getImgList().then(response => {
-          this.imgList = response.data
-        console.log(this.imgList)
+      api.getSpotDetail().then(response => {
+        this.spotInfo = response.data
+        this.imgList = response.data.img
+        console.log(this.spotInfo)
         }
       )
     },
     computed: {
       imgList1() {
-        if(this.imgList.length > 3) {
-          return this.imgList.slice(0,3)
+        if (this.imgList.length > 3) {
+          return this.imgList.slice(0, 3)
         } else {
           return this.imgList
         }
@@ -418,5 +421,12 @@
         }, 3000)
       },
     },
+    filters: {
+      fee(type,fee) {
+        if(type == 1) {
+          return `${fee}元/人`
+        }
+      }
+    }
   }
 </script>

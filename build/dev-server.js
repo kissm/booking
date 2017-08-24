@@ -22,10 +22,16 @@ var proxyTable = config.dev.proxyTable
 
 var app = express()
 var appRoutes = express.Router()
-appRoutes.get('/getImgList', function (req, res) {
+appRoutes.get('/getSpotDetail', function (req, res) {
   res.json({
     code: 200,
-    data: ['../static/timg.jpg', '../static/cd.png', '../static/timg.jpg', '../static/cd.png']
+    data: {
+      square: 80,
+      hold: 50,
+      fee_type: 1,
+      fee: 10,
+      img: ['../static/timg.jpg', '../static/cd.png', '../static/timg.jpg', '../static/cd.png']
+    }
   })
 })
 app.use('/api', appRoutes)
