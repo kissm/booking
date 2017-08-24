@@ -259,3 +259,5 @@ to {width:50%;}
 
 .spinner{position:absolute;top:37%;margin-left:44%;}
 .mint-msgbox-confirm{font-size:16px;}
+/*.vux-slider > .vux-indicator > a > .vux-icon-dot{width:8px !important;height:8px !important;opacity:.2}*/
+/*.vux-slider > .vux-indicator > a > .vux-icon-dot.active{opacity:1;background-color:#007aff !important;}*/

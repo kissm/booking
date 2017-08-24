@@ -262,20 +262,21 @@
                 </ul>
                 <h3>现场图</h3>
                 <ul class="img-list">
-                    <li v-for="(img,index) in imgList" @click="swiperShow(index)">
+                    <li v-for="(img,index) in imgList1" @click="swiperShow(index)">
                         <div class="img-box">
                             <img :src="img">
                         </div>
                     </li>
                 </ul>
             </div>
-            <div class="swiper-tc" v-if="swiper_tc" @click="swiperHide">
-                <div class="slider-wrapper" v-if="imgList.length">
-                    <slider :initPage="initPage">
-                        <div v-for="img in imgList">
-                            <img :src="img">
+            <div class="swiper-tc" v-show="swiper_tc" @click="swiperHide">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" v-for="img in imgList">
+                            <img height="364" :src="img"/>
                         </div>
-                    </slider>
+                    </div>
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
             <footer class="fixedFooter">
@@ -298,7 +299,8 @@
                     </div>
                     <div class="input-box">
                         <label>验证码</label>
-                        <input type="text" placeholder="输入验证码" id="certifycode" v-model="certifycode" class="input certifycode">
+                        <input type="text" placeholder="输入验证码" id="certifycode" v-model="certifycode"
+                               class="input certifycode">
                         <div class="btn-box">
                             <input type="button" class="btn" value="获取验证码" :disabled="disable" @click="getCertifyCode"/>
                         </div>
@@ -315,102 +317,106 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import slider from '../components/slider.vue'
-    import api from '../utils/api'
-    import {MessageBox, Spinner} from 'mint-ui'
+  import api from '../utils/api'
 
-    export default {
-        data() {
-            return {
-                swiper_tc: false,
-                imgList: [],
-                dots: [],
-                swiper: null,
-                initPage: 0,
-                certifyTc: false,
-                disable: false,
-                spinner: false,
-                phone: '',
-                certifycode: '',
+  export default {
+    data() {
+      return {
+        swiper_tc: false,
+        imgList: [],
+        swiper: null,
+        certifyTc: false,
+        disable: false,
+        spinner: false,
+        phone: '',
+        certifycode: '',
+      }
+    },
+    created() {
+      let _this = this
+      // 从url获取信息
+      api.getImgList().then(response => {
+          this.imgList = response.data
+        console.log(this.imgList)
+        }
+      )
+    },
+    computed: {
+      imgList1() {
+        if(this.imgList.length > 3) {
+          return this.imgList.slice(0,3)
+        } else {
+          return this.imgList
+        }
+      }
+    },
+    mounted() {
+      $('.slide').each(function () {
+        var slideLiW = $(".slide .time-list li").width()
+        var slideLiN = $(this).find(".time-list").find("li").length
+        var ulW = (slideLiW + 1) * slideLiN
+        $(".slide .slide-area").width(ulW)
+        $(".slide ul").width(ulW)
+      })
+    },
+    methods: {
+      swiperShow(index) {
+        this.swiper_tc = true
+        this.$nextTick(() => {
+          this.swiper = new Swiper('.swiper-container', {
+            initialSlide: index,
+            loop: true,
+            pagination: '.swiper-pagination'
+          });
+        })
+      },
+      swiperHide() {
+        this.swiper_tc = false
+        this.swiper.destroy(false, true)
+      },
+      booking() {
+        if (true) { // 如果已经选择了场地
+          this.certifyTc = true
+        }
+      },
+      certifyTcHide() {
+        this.certifyTc = false
+      },
+      getCertifyCode(e) {
+        let phoneReg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/
+        if (!phoneReg.test(this.phone)) {
+          MessageBox('提示', '请填写正确的手机号')
+          return false
+        } else {
+          this.disable = true
+          let time = 60
+          /*等待时间*/
+          let _this = this
+          this.timer = setInterval(function () {
+            e.target.value = --time + "(s)"
+            console.log(time)
+            if (time == 0) {
+              clearInterval(_this.timer)
+              _this.disable = false
+              e.target.value = '重新获取验证码'
             }
-        },
-        created() {
-            let _this = this
-            // 从url获取信息
-            api.getImgList().then(response => {
-                this.imgList = response.data
-            })
-        },
-        mounted() {
-            $('.slide').each(function () {
-                var slideLiW = $(".slide .time-list li").width()
-                var slideLiN = $(this).find(".time-list").find("li").length
-                var ulW = (slideLiW + 1) * slideLiN
-                $(".slide .slide-area").width(ulW)
-                $(".slide ul").width(ulW)
-            })
-        },
-        components: {
-            slider
-        },
-        methods: {
-            swiperShow(index) {
-                this.initPage = index
-                this.swiper_tc = true
-            },
-            swiperHide() {
-                this.swiper_tc = false
-            },
-            booking() {
-                if(true) { // 如果已经选择了场地
-                    this.certifyTc = true
-                }
-            },
-            certifyTcHide() {
-                this.certifyTc = false
-            },
-            getCertifyCode(e) {
-                let phoneReg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/
-                if (!phoneReg.test(this.phone)) {
-                    MessageBox('提示', '请填写正确的手机号')
-                    return false
-                } else {
-                    this.disable = true
-                    let time = 60
-                    /*等待时间*/
-                    let _this = this
-                    this.timer = setInterval(function () {
-                        e.target.value = --time + "(s)"
-                        console.log(time)
-                        if (time == 0) {
-                            clearInterval(_this.timer)
-                            _this.disable = false
-                            e.target.value = '重新获取验证码'
-                        }
-                    }, 1000)
-                    //调用获取验证码接口
-                }
-            },
-            certifyTcSure() {
-                if(!this.certifycode) {
-                    MessageBox('提示', '请输入验证码')
-                    return false
-                }
-                this.spinner = true
-                //调用验证接口
-                setTimeout(() => {
-                    this.certifyTc = false
-                    clearInterval(this.timer)
-                    this.$router.push('pay')
-                },3000)
-            },
-        },
-    }
+          }, 1000)
+          //调用获取验证码接口
+        }
+      },
+      certifyTcSure() {
+        if (!this.certifycode) {
+          MessageBox('提示', '请输入验证码')
+          return false
+        }
+        this.spinner = true
+        //调用验证接口
+        setTimeout(() => {
+          this.certifyTc = false
+          clearInterval(this.timer)
+          this.$router.push('pay')
+        }, 3000)
+      },
+    },
+  }
 </script>
-<style scoped lang="stylus" rel="stylesheet/stylus">
-    .slider-wrapper
-        position: relative
-        width: 100%
-        top: 20%
-        overflow: hidden
-</style>

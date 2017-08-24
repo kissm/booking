@@ -23,10 +23,10 @@ var proxyTable = config.dev.proxyTable
 var app = express()
 var appRoutes = express.Router()
 appRoutes.get('/getImgList', function (req, res) {
-    res.json({
-        code: 200,
-        data: ['../static/cd.png','../static/cd.png','../static/timg.jpg']
-    })
+  res.json({
+    code: 200,
+    data: ['../static/timg.jpg', '../static/cd.png', '../static/timg.jpg', '../static/cd.png']
+  })
 })
 app.use('/api', appRoutes)
 var compiler = webpack(webpackConfig)
@@ -43,7 +43,7 @@ var hotMiddleware = require('webpack-hot-middleware')(compiler, {
 // force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function (compilation) {
   compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-    hotMiddleware.publish({ action: 'reload' })
+    hotMiddleware.publish({action: 'reload'})
     cb()
   })
 })
@@ -52,7 +52,7 @@ compiler.plugin('compilation', function (compilation) {
 Object.keys(proxyTable).forEach(function (context) {
   var options = proxyTable[context]
   if (typeof options === 'string') {
-    options = { target: options }
+    options = {target: options}
   }
   app.use(proxyMiddleware(options.filter || context, options))
 })
