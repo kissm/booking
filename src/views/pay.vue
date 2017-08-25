@@ -11,25 +11,40 @@
 			<!--header 结束-->
 			<!--main-->
 			<div class="main pay">
-				<ul class="item">
+				<ul class="item first-item">
 					<li>
-						<p><span class="type fl">台球馆</span><span class="where">1号馆</span></p>
+						<p><span class="type fl">台球馆</span></p>
 						<p><i class="position-ico2"></i><span>利尔达物联网科技园2号楼2楼201室</span></p>
 					</li>
+				</ul>
+				<ul class="item pay-price">
 					<li>
-						<p><span>2016-06-15 09:00-10:00</span><span class="fr">￥52</span></p>
-						<p><span>2016-06-15 10:00-11:00</span><span class="fr">￥52</span></p>
-						<p class="cl"><span class="total fr">合计：￥104</span></p>
+						<div class="wh-pri">
+							<p class="where">1号馆</p>
+						</div>
+						<div class="wh-time-pri">
+							<p><span>2016-06-15   09:00-10:00</span><span class="price fr">￥52</span></p>
+							<p><span>2016-06-15   10:00-11:00</span><span class="price fr">￥52</span></p>
+							<p><span>2016-06-15   09:00-10:00</span><span class="price fr">￥52</span></p>
+							<p><span>2016-06-15   10:00-11:00</span><span class="price fr">￥52</span></p>
+							<p><span>2016-06-15   09:00-10:00</span><span class="price fr">￥52</span></p>
+						</div>
 					</li>
+					<li>
+						<div class="wh-pri">
+							<p class="where">2号馆</p>
+						</div>
+						<div class="wh-time-pri">
+							<p><span>2016-06-15   09:00-10:00</span><span class="price fr">￥52</span></p>
+							<p><span>2016-06-15   10:00-11:00</span><span class="price fr">￥52</span></p>
+						</div>
+					</li>
+					<li class="cl"><span class="total fr">合计：￥104</span></li>
 				</ul>
 				<ul class="link">
 					<li>
-						<span>联系方式</span>
-						<input type="text" placeholder="请输入联系方式">
-					</li>
-					<li>
 						<span>备注</span>
-						<input type="text" placeholder="请输入联系方式">
+						<input type="text" placeholder="请在这里留下您的需求">
 					</li>
 				</ul>
 				<div class="item">
@@ -75,6 +90,7 @@
 	</template>
 
 	<script type="text/ecmascript-6">
+        import api from '../utils/api'
         import { MessageBox } from 'mint-ui'
         export default{
             data(){
@@ -100,6 +116,7 @@
                     $(e.currentTarget).toggleClass("ico-check");
                 },
                 sure:function () {
+                    let _this=this;
                     if(!$('#protocol').hasClass("ico-check")){
                         MessageBox.alert('请阅读《场地预约条款》', '提示');
                     }else if($('#invoiceBtn').hasClass("ico-check")){
@@ -109,14 +126,78 @@
                             MessageBox.alert('请输入纳税人识别号或统一社会信用代码', '提示');
                         }else if(!$('#iaddr').val()){
                             MessageBox.alert('请输入邮寄地址', '提示');
-                        }else{alert("pay")}
+                        }else{_this.pay()}
                     }else{
-                        alert("pay")
+                        _this.pay()
                     }
 
                 },
                 pay:function () {
-                    
+                    let _this = this;
+                    let data = {
+
+                    };
+                    window.location.href="record";
+                },
+                weixinPay:function(data){
+                    let _this= this;
+                    if (typeof WeixinJSBridge == "undefined"){//微信浏览器内置对象。参考微信官方文档
+                        if( document.addEventListener ){
+                            document.addEventListener('WeixinJSBridgeReady', _this.onBridgeReady(data), false);
+                        }else if (document.attachEvent){
+                            document.attachEvent('WeixinJSBridgeReady', _this.onBridgeReady(data));
+                            document.attachEvent('onWeixinJSBridgeReady',_this.onBridgeReady(data));
+                        }
+                    }else{
+                        _this.onBridgeReady(data);
+                    }
+                },
+                onBridgeReady:function (data) {
+                    let _this=this;
+                    WeixinJSBridge.invoke(
+                        'getBrandWCPayRequest', {
+                            "appId":data.appId,     //公众号名称，由商户传入
+                            "timeStamp":data.timeStamp, //时间戳，自1970年以来的秒数
+                            "nonceStr":data.nonceStr, //随机串
+                            "package":data.package,
+                            "signType":data.signType, //微信签名方式：
+                            "paySign":data.paySign //微信签名
+                        },
+                        function(res){
+                            if(res.err_msg == "get_brand_wcpay_request:ok" ) {// 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+                                if(_this.delivery_mode=="1"){
+                                    _this.$alert("请到民宿前台领取", "提示", {customClass: 'alert',callback: function () {
+                                        setTimeout(function () {
+                                            window.location.href = 'goodsOrder';
+                                            _this.disable=false;
+                                        }, 500);
+                                    }});
+                                }else if(_this.delivery_mode=="2"){
+                                    _this.$alert("请耐心等待工作人员送货", "提示", {customClass: 'alert',callback: function () {
+                                        setTimeout(function () {
+                                            window.location.href = 'goodsOrder';
+                                            _this.disable=false;
+                                        }, 500);
+                                    }});
+                                }else if(_this.delivery_mode=="3"){
+                                    _this.$alert("酒店发货后,请注意查收快递", "提示", {customClass: 'alert',callback: function () {
+                                        setTimeout(function () {
+                                            window.location.href = 'goodsOrder';
+                                            _this.disable=false;
+                                        }, 500);
+                                    }});
+                                }
+
+                            } else{
+                                _this.$alert("您取消了支付或支付未成功", "提示", {customClass: 'alert',callback: function () {
+                                    setTimeout(function () {
+                                        window.location.href = 'goodsOrder';
+                                        _this.disable=false;
+                                    }, 500);
+                                }});
+                            }
+                        }
+                    );
                 }
             }
         }
