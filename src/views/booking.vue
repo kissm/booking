@@ -10,7 +10,7 @@
             </header>
             <!--header 结束-->
             <!--main-->
-            <div class="main" id="main" style="padding-top:0;">
+            <div class="main" id="main">
                 <div id="tabfirst" class="tab weekTab">
                     <ul class="cl">
                         <li class="home_1 nowpage">
