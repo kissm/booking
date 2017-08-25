@@ -306,7 +306,7 @@
                         </div>
                     </div>
                 </form>
-                <p class="text">请输入联系方式，以便于我们即使与您联系 </p>
+                <p class="text">请输入联系方式，以便于我们及时与您联系 </p>
                 <mt-spinner type="snake" :size="30" color="#ff7109" class="spinner" v-show="spinner"></mt-spinner>
                 <div class="footer-box">
                     <a class="sure" @click.stop="certifyTcSure">确定</a>

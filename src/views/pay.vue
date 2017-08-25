@@ -13,8 +13,8 @@
 			<div class="main pay">
 				<ul class="item first-item">
 					<li>
-						<p><span class="type fl">台球馆</span></p>
-						<p><i class="position-ico2"></i><span>利尔达物联网科技园2号楼2楼201室</span></p>
+						<p><span class="type">台球馆</span></p>
+
 					</li>
 				</ul>
 				<ul class="item pay-price">
