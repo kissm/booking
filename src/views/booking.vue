@@ -11,38 +11,7 @@
             <!--header 结束-->
             <!--main-->
             <div class="main" id="main">
-                <div id="tabfirst" class="tab weekTab">
-                    <ul class="cl">
-                        <li class="home_1 nowpage">
-                            <p>06.14</p>
-                            <a href="#">二</a>
-                        </li>
-                        <li class="home_2">
-                            <p>06.15</p>
-                            <a href="#">三</a>
-                        </li>
-                        <li class="home_3">
-                            <p>06.16</p>
-                            <a href="#">四</a>
-                        </li>
-                        <li class="home_4">
-                            <p>06.17</p>
-                            <a href="#">五</a>
-                        </li>
-                        <li class="home_4">
-                            <p>06.18</p>
-                            <a href="#">六</a>
-                        </li>
-                        <li class="home_4">
-                            <p>06.19</p>
-                            <a href="#">日</a>
-                        </li>
-                        <li class="home_4">
-                            <p>06.20</p>
-                            <a href="#">一</a>
-                        </li>
-                    </ul>
-                </div>
+                <datebar></datebar>
                 <div class="top98">
                     <div class="CDList nowCon cl">
                         <ul class="CDname fl">
@@ -251,13 +220,13 @@
                 <h3>基本信息</h3>
                 <ul class="text-list">
                     <li>
-                        场地信息<span>{{spotInfo.square}}㎡</span>
+                        场地信息<span>{{spotInfo.acreage}}㎡</span>
                     </li>
                     <li>
-                        可容纳<span>{{spotInfo.hold}}人</span>
+                        可容纳<span>{{spotInfo.contain}}人</span>
                     </li>
                     <li>
-                        收费标准<span>{{spotInfo.fee_type | fee(spotInfo.fee)}}</span>
+                        收费标准<span>{{spotInfo.charge_mode | fee(spotInfo.price,spotInfo.unit)}}</span>
                     </li>
                 </ul>
                 <h3>现场图</h3>
@@ -317,116 +286,126 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import api from '../utils/api'
-  import {MessageBox} from 'mint-ui'
-
-  export default {
-    data() {
-      return {
-        swiper_tc: false,
-        spotInfo: {},
-        imgList: [],
-        swiper: null,
-        certifyTc: false,
-        disable: false,
-        spinner: false,
-        phone: '',
-        certifycode: '',
-      }
-    },
-    created() {
-      let _this = this
-      // 从url获取信息
-      api.getSpotDetail().then(response => {
-        this.spotInfo = response.data
-        this.imgList = response.data.img
-        console.log(this.spotInfo)
-        }
-      )
-    },
-    computed: {
-      imgList1() {
-        if (this.imgList.length > 3) {
-          return this.imgList.slice(0, 3)
-        } else {
-          return this.imgList
-        }
-      }
-    },
-    mounted() {
-      $('.slide').each(function () {
-        var slideLiW = $(".slide .time-list li").width()
-        var slideLiN = $(this).find(".time-list").find("li").length
-        var ulW = (slideLiW + 1) * slideLiN
-        $(".slide .slide-area").width(ulW)
-        $(".slide ul").width(ulW)
-      })
-    },
-    methods: {
-      swiperShow(index) {
-        this.swiper_tc = true
-        this.$nextTick(() => {
-          this.swiper = new Swiper('.swiper-container', {
-            initialSlide: index,
-            loop: true,
-            pagination: '.swiper-pagination'
-          });
-        })
-      },
-      swiperHide() {
-        this.swiper_tc = false
-        this.swiper.destroy(false, true)
-      },
-      booking() {
-        if (true) { // 如果已经选择了场地
-          this.certifyTc = true
-        }
-      },
-      certifyTcHide() {
-        this.certifyTc = false
-      },
-      getCertifyCode(e) {
-        let phoneReg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/
-        if (!phoneReg.test(this.phone)) {
-          MessageBox('提示', '请填写正确的手机号')
-          return false
-        } else {
-          this.disable = true
-          let time = 60
-          /*等待时间*/
-          let _this = this
-          this.timer = setInterval(function () {
-            e.target.value = --time + "(s)"
-            console.log(time)
-            if (time == 0) {
-              clearInterval(_this.timer)
-              _this.disable = false
-              e.target.value = '重新获取验证码'
+    import datebar from '../components/dateBar.vue'
+    import api from '../utils/api'
+    import {MessageBox} from 'mint-ui'
+    export default {
+        data() {
+            return {
+                swiper_tc: false,
+                spotInfo: {},
+                imgList: [],
+                swiper: null,
+                certifyTc: false,
+                disable: false,
+                spinner: false,
+                phone: '',
+                certifycode: '',
             }
-          }, 1000)
-          //调用获取验证码接口
+        },
+        created() {
+            let _this = this
+            // 从url获取信息
+            api.getRoomInfo().then(response => {
+                    this.spotInfo = response
+                    this.imgList = response.img
+                    console.log(this.spotInfo)
+                }
+            )
+        },
+        components: {
+            datebar
+        },
+        computed: {
+            imgList1() {
+                if (this.imgList.length > 3) {
+                    return this.imgList.slice(0, 3)
+                } else {
+                    return this.imgList
+                }
+            }
+        },
+        mounted() {
+            $('.slide').each(function () {
+                var slideLiW = $(".slide .time-list li").width()
+                var slideLiN = $(this).find(".time-list").find("li").length
+                var ulW = (slideLiW + 1) * slideLiN
+                $(".slide .slide-area").width(ulW)
+                $(".slide ul").width(ulW)
+            })
+        },
+        methods: {
+            swiperShow(index) {
+                this.swiper_tc = true
+                this.$nextTick(() => {
+                    this.swiper = new Swiper('.swiper-container', {
+                        initialSlide: index,
+                        loop: true,
+                        pagination: '.swiper-pagination'
+                    });
+                })
+            },
+            swiperHide() {
+                this.swiper_tc = false
+                this.swiper.destroy(false, true)
+            },
+            booking() {
+                if (true) { // 如果已经选择了场地
+                    this.certifyTc = true
+                }
+            },
+            certifyTcHide() {
+                this.certifyTc = false
+            },
+            getCertifyCode(e) {
+                let phoneReg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/
+                if (!phoneReg.test(this.phone)) {
+                    MessageBox('提示', '请填写正确的手机号')
+                    return false
+                } else {
+                    this.disable = true
+                    let time = 60
+                    /*等待时间*/
+                    let _this = this
+                    this.timer = setInterval(function () {
+                        e.target.value = --time + "(s)"
+                        console.log(time)
+                        if (time == 0) {
+                            clearInterval(_this.timer)
+                            _this.disable = false
+                            e.target.value = '重新获取验证码'
+                        }
+                    }, 1000)
+                    //调用获取验证码接口
+                }
+            },
+            certifyTcSure() {
+                if (!this.certifycode) {
+                    MessageBox('提示', '请输入验证码')
+                    return false
+                }
+                this.spinner = true
+                //调用验证接口
+                setTimeout(() => {
+                    this.certifyTc = false
+                    clearInterval(this.timer)
+                    this.$router.push('pay')
+                }, 3000)
+            },
+        },
+        filters: {
+            fee(type, fee, unit) {
+                if (type == 1) {
+                    return `${fee}元/人`
+                } else if (type == 2) {
+                    if(unit == 30) {
+                        return `${fee}元/半小时`
+                    }
+                    if(unit == 60) {
+                        return `${fee}元/小时`
+                    }
+                }
+            }
         }
-      },
-      certifyTcSure() {
-        if (!this.certifycode) {
-          MessageBox('提示', '请输入验证码')
-          return false
-        }
-        this.spinner = true
-        //调用验证接口
-        setTimeout(() => {
-          this.certifyTc = false
-          clearInterval(this.timer)
-          this.$router.push('pay')
-        }, 3000)
-      },
-    },
-    filters: {
-      fee(type,fee) {
-        if(type == 1) {
-          return `${fee}元/人`
-        }
-      }
     }
-  }
 </script>

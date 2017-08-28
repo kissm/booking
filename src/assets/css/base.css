@@ -37,7 +37,7 @@ header{position:fixed;top:0;width:100%;z-index:999;}
 .head_right {width: 88px;height: 44px;position: absolute;top: 0;right: 0;}
 .head_right a {line-height: 44px;text-align: center;color: #fff;font-size: 14px;}
 .head_right a.user{float:right;width:44px;height:44px;background:url(../img/icon-me.png) no-repeat center center;background-size:50%;}
-.head_right a.dateBtn{float:left;position:relative;width:44px;height:44px;background:url(../img/iconfont-rili-copy.png) no-repeat center center;background-size:50%;}
+/*.head_right a.dateBtn{float:left;position:relative;width:44px;height:44px;background:url(../img/iconfont-rili-copy.png) no-repeat center center;background-size:50%;}*/
 
 ::-webkit-scrollbar {
 width: 0em;
