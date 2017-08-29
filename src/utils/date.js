@@ -28,8 +28,6 @@ export function addDate(date, days) {
 
 export function timetrans(time, min) {
     //在当前时间的基础上加上min分钟
-    console.log(time)
-    console.log(min)
     let h = parseInt(time.split(':')[0]);
     let m = parseInt(time.split(':')[1]);
     // let now = new Date(time);
