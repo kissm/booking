@@ -4,6 +4,21 @@
 const express = require('express')
 const appRoutes = express.Router()
 
+appRoutes.get('/getPlace', function (req, res) {
+    res.json({
+        status: 'success',
+        msg: 'ok',
+        code: 200,
+        data: [
+            {
+              id:1,
+            },
+            {
+              id:2
+            }
+        ]
+    })
+})
 appRoutes.get('/getRoomInfo', function (req, res) {
   res.json({
     code: 200,

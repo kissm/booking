@@ -53,3 +53,31 @@
   </div>
 </div>
 </template>
+
+<script>
+    import api from '../utils/api'
+    import {mapGetters} from 'vuex'
+    export default {
+        data(){
+            return{
+
+            }
+        },
+        created(){
+
+        },
+        mounted(){
+            $(document).ready(function(){
+                $(".qiuc").addClass("hover");
+            });
+        },
+        computed: {
+            ...mapGetters([
+                'spotList'
+            ]),
+        },
+        methods:{
+
+        }
+    }
+</script>

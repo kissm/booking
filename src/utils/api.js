@@ -20,6 +20,23 @@ instance.interceptors.response.use(function (response) {
 });
 export default {
     //GET
+    getPlace: (data) => {
+        return new Promise((resolve, reject) => {
+            instance.get('getPlace', {
+                // params: {
+                //     business_id: data.business_id,
+                //     room_id: data.room_id
+                // }
+            }).then(response => {
+                let resData = response.data;
+                if (resData.code == 200) {
+                    resolve(resData.data);
+                } else {
+                    MessageBox.alert(resData.msg, "提示");
+                }
+            });
+        })
+    },
     getRoomInfo: (data) => {
         return new Promise((resolve, reject) => {
             instance.get('getRoomInfo', {

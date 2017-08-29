@@ -10,12 +10,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        spotList:[],
         dateList: [],
         rooms: [],
         roomInfo: '',
         timeInfo: ''
     },
     mutations: {
+        getPlace(state,data) {
+          state.spotList = data;
+        },
         getDates(state, data) {
             state.dateList = data
         },
@@ -30,12 +34,18 @@ export default new Vuex.Store({
         }
     },
     getters: {
+        spotList: (state) => state.spotList,
         dateList: (state) => state.dateList,
         rooms: (state) => state.rooms,
         roomInfo: (state) => state.roomInfo,
         timeInfo: (state) => state.timeInfo
     },
     actions: {
+        getPlace({commit},data){
+            api.getPlace(data).then(response => {
+                commit('getPlace', response)
+            })
+        },
         getDateList({commit}, data) {
             api.getBookingDays(data).then(response => {
                 let days = response
