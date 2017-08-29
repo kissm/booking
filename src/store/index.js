@@ -3,6 +3,7 @@
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
+import route from '../router'
 import api from '../utils/api'
 import {addDate} from '../utils/date'
 
@@ -10,16 +11,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        spotList:[],
         dateList: [],
         rooms: [],
         roomInfo: '',
         timeInfo: ''
     },
     mutations: {
-        getPlace(state,data) {
-          state.spotList = data;
-        },
         getDates(state, data) {
             state.dateList = data
         },
@@ -34,19 +31,17 @@ export default new Vuex.Store({
         }
     },
     getters: {
-        spotList: (state) => state.spotList,
         dateList: (state) => state.dateList,
         rooms: (state) => state.rooms,
         roomInfo: (state) => state.roomInfo,
         timeInfo: (state) => state.timeInfo
     },
     actions: {
-        getPlace({commit},data){
-            api.getPlace(data).then(response => {
-                commit('getPlace', response)
-            })
-        },
-        getDateList({commit}, data) {
+        getDateList({commit}) {
+            let data = {
+                id: route.currentRoute.query.id,
+                place_type_id: route.currentRoute.query.place_type_id
+            }
             api.getBookingDays(data).then(response => {
                 let days = response
                 let i = 0
@@ -64,17 +59,30 @@ export default new Vuex.Store({
                 commit('getDates', dateList)
             })
         },
-        getRooms({commit}, data) {
+        getRooms({commit}, date) {
+            let data = {
+                id: route.currentRoute.query.id,
+                date: date,
+                place_type_id: route.currentRoute.query.place_type_id
+            }
             api.getRooms(data).then(response => {
                 commit('getRooms', response)
             })
         },
-        getRoomInfo({commit}, data) {
+        getRoomInfo({commit}, room_id) {
+            let data = {
+                id: route.currentRoute.query.id,
+                room_id: room_id
+            }
             api.getRoomInfo(data).then(response => {
                 commit('changeRoomInfo', response)
             })
         },
-        getPlaceTimes({ commit }, data) {
+        getPlaceTimes({ commit }) {
+            let data = {
+                id: route.currentRoute.query.id,
+                place_type_id: route.currentRoute.query.place_type_id
+            }
             api.getPlaceTimes(data).then(response => {
                 commit('getTimeInfo', response)
             })

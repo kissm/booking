@@ -41,7 +41,7 @@ export default {
         return new Promise((resolve, reject) => {
             instance.get('getRoomInfo', {
                 params: {
-                    business_id: data.business_id,
+                    id: data.id,
                     room_id: data.room_id
                 }
             }).then(response => {
@@ -58,7 +58,7 @@ export default {
         return new Promise((resolve, reject) => {
             instance.get('getBookingDays', {
                 params: {
-                    business_id: data.business_id,
+                    id: data.id,
                     place_type_id: data.place_type_id
                 }
             }).then(response => {
@@ -75,7 +75,7 @@ export default {
         return new Promise((resolve, reject) => {
             instance.get('getPlaceTimes', {
                 params: {
-                    business_id: data.business_id,
+                    id: data.id,
                     place_type_id: data.place_type_id
                 }
             }).then(response => {
@@ -92,7 +92,7 @@ export default {
         return new Promise((resolve, reject) => {
             instance.get('getRooms', {
                 params: {
-                    business_id: data.business_id,
+                    id: data.id,
                     date: data.date,
                     place_type_id: data.place_type_id
                 }

@@ -12,35 +12,7 @@
             <!--main-->
             <div class="main" id="main">
                 <datebar></datebar>
-                <div class="top98">
-                    <div class="CDList nowCon cl">
-                        <ul class="CDname fl">
-                            <li v-for="room in rooms">{{room.name}}</li>
-                        </ul>
-                        <div class="slide" id="slide">
-                            <div class="slide-area">
-                                <timebar></timebar>
-                                <ul class="item-list" v-for="room in rooms">
-                                    <li v-for="item in room.rooms">
-                                        <div v-if="item.is_occupy === 0">
-                                            <input id="time_1" class="radio" name="shijian" type="checkbox">
-                                            <label for="time_1" class="trigger">
-                                                <p class="money">￥{{item.price}}</p>
-                                            </label>
-                                        </div>
-                                        <p v-else="item.is_occupy === 0" class="bggrey">已过期</p>
-                                    </li>
-                                    <!--<li>-->
-                                        <!---->
-                                    <!--</li>-->
-                                    <!--<li>-->
-                                        <!--<p class="bggrey">已过期</p>-->
-                                    <!--</li>-->
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <bookingdetail></bookingdetail>
             </div>
             <ul class="colorTip">
                 <li>
@@ -124,7 +96,7 @@
 
 <script type="text/ecmascript-6">
     import datebar from '../components/dateBar.vue'
-    import timebar from '../components/timeBar.vue'
+    import bookingdetail from '../components/bookingDetail.vue'
     import {MessageBox} from 'mint-ui'
     import {mapGetters} from 'vuex'
     export default {
@@ -132,7 +104,6 @@
             return {
                 swiper_tc: false,
                 imgList: [],
-                room_id: '',
                 swiper: null,
                 certifyTc: false,
                 disable: false,
@@ -143,7 +114,7 @@
         },
         components: {
             datebar,
-            timebar
+            bookingdetail
         },
         computed: {
             imgList1() {
@@ -154,22 +125,12 @@
                 }
             },
             ...mapGetters([
-                'roomInfo','rooms'
+                'roomInfo'
             ])
         },
         watch: {
             roomInfo(val) {
                 this.imgList = val.img
-            },
-            rooms(val) {
-                this.room_id = val[0].id
-            },
-            room_id(val) {
-                let data = {
-                    business_id: this.$route.query.business_id,
-                    room_id: val
-                }
-                this.$store.dispatch('getRoomInfo', data)
             }
         },
         methods: {
