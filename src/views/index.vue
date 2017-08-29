@@ -14,7 +14,7 @@
   	<a href="tel:+15757856627" class="phone-line"><i class="icon-phone"></i>15757856627</a>
   	<div class="qiuc">
   		<img src="../assets/img/CDtaiQ.png">
-  		<a class="changdi" href="booking?business_id=1&place_type_id=1">
+  		<a class="changdi" href="booking?id=1&place_type_id=1">
   			<h3>会议室</h3>
   			<p>开放时间：9:00-24:00</p>
   		</a>

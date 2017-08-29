@@ -3,6 +3,7 @@
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
+import route from '../router'
 import api from '../utils/api'
 import {addDate} from '../utils/date'
 
@@ -36,7 +37,11 @@ export default new Vuex.Store({
         timeInfo: (state) => state.timeInfo
     },
     actions: {
-        getDateList({commit}, data) {
+        getDateList({commit}) {
+            let data = {
+                id: route.currentRoute.query.id,
+                place_type_id: route.currentRoute.query.place_type_id
+            }
             api.getBookingDays(data).then(response => {
                 let days = response
                 let i = 0
@@ -54,17 +59,30 @@ export default new Vuex.Store({
                 commit('getDates', dateList)
             })
         },
-        getRooms({commit}, data) {
+        getRooms({commit}, date) {
+            let data = {
+                id: route.currentRoute.query.id,
+                date: date,
+                place_type_id: route.currentRoute.query.place_type_id
+            }
             api.getRooms(data).then(response => {
                 commit('getRooms', response)
             })
         },
-        getRoomInfo({commit}, data) {
+        getRoomInfo({commit}, room_id) {
+            let data = {
+                id: route.currentRoute.query.id,
+                room_id: room_id
+            }
             api.getRoomInfo(data).then(response => {
                 commit('changeRoomInfo', response)
             })
         },
-        getPlaceTimes({ commit }, data) {
+        getPlaceTimes({ commit }) {
+            let data = {
+                id: route.currentRoute.query.id,
+                place_type_id: route.currentRoute.query.place_type_id
+            }
             api.getPlaceTimes(data).then(response => {
                 commit('getTimeInfo', response)
             })

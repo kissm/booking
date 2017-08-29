@@ -15,24 +15,15 @@
 
 <script type="text/ecmascript-6">
     import {mapGetters} from 'vuex'
-
     export default {
         data() {
             return {
                 curDate: 0,
-                business_id: '',
-                place_type_id: ''
             }
         },
         created() {
-            this.business_id = this.$route.query.business_id
-            this.place_type_id = this.$route.query.place_type_id
-            let data = {
-                business_id: this.business_id,
-                place_type_id: this.place_type_id
-            }
-            this.$store.dispatch('getDateList', data)
-            this.$store.dispatch('getPlaceTimes', data)
+            this.$store.dispatch('getDateList')
+            this.$store.dispatch('getPlaceTimes')
         },
         computed: {
             ...mapGetters([
@@ -41,20 +32,10 @@
         },
         watch: {
             dateList(val) {
-                let data = {
-                    business_id: this.business_id,
-                    date: val[this.curDate].date,
-                    place_type_id: this.place_type_id
-                }
-                this.$store.dispatch('getRooms', data)
+                this.$store.dispatch('getRooms', val[this.curDate].date)
             },
             curDate(val) {
-                let data = {
-                    business_id: this.business_id,
-                    date: this.dateList[val].date,
-                    place_type_id: this.place_type_id
-                }
-                this.$store.dispatch('getRooms', data)
+                this.$store.dispatch('getRooms', this.dateList[val].date)
             }
         },
         mounted() {

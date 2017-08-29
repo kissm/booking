@@ -76,11 +76,7 @@
                 this.room_id = val[0].id
             },
             room_id(val) {
-                let data = {
-                    business_id: this.$route.query.business_id,
-                    room_id: val
-                }
-                this.$store.dispatch('getRoomInfo', data)
+                this.$store.dispatch('getRoomInfo', val)
             }
         },
         methods: {

@@ -45,7 +45,7 @@ appRoutes.get('/getPlaceTimes', function (req, res) {
     status: 'success',
     msg: 'ok',
     data: {
-      time_start: '17:00',
+      time_start: '16:00',
       time_end: '22:00',
       unit: 60
     },
