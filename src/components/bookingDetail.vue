@@ -12,8 +12,8 @@
                     <ul class="item-list" v-for="room in rooms">
                         <li v-for="item in room.rooms">
                             <div v-if="item.is_occupy === 0">
-                                <input id="time_1" class="radio" name="shijian" type="checkbox">
-                                <label for="time_1" class="trigger">
+                                <input :id="'time_'+item.id" class="radio" name="shijian" type="checkbox">
+                                <label :for="'time_'+item.id" class="trigger">
                                     <p class="money">￥{{item.price}}</p>
                                 </label>
                             </div>
