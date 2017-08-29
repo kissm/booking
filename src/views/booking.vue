@@ -20,23 +20,7 @@
                         </ul>
                         <div class="slide" id="slide">
                             <div class="slide-area">
-                                <ul class="time-list">
-                                    <li>8:00</li>
-                                    <li>9:00</li>
-                                    <li>10:00</li>
-                                    <li>11:00</li>
-                                    <li>12:00</li>
-                                    <li>13:00</li>
-                                    <li>14:00</li>
-                                    <li>15:00</li>
-                                    <li>16:00</li>
-                                    <li>17:00</li>
-                                    <li>18:00</li>
-                                    <li>19:00</li>
-                                    <li>20:00</li>
-                                    <li>21:00</li>
-                                    <li>22:00</li>
-                                </ul>
+                                <timebar></timebar>
                                 <ul class="item-list">
                                     <li>
                                         <input id="time_1" class="radio" name="shijian" type="checkbox">
@@ -287,6 +271,7 @@
 
 <script type="text/ecmascript-6">
     import datebar from '../components/dateBar.vue'
+    import timebar from '../components/timeBar.vue'
     import api from '../utils/api'
     import {MessageBox} from 'mint-ui'
     export default {
@@ -314,7 +299,8 @@
             )
         },
         components: {
-            datebar
+            datebar,
+            timebar
         },
         computed: {
             imgList1() {
@@ -326,13 +312,7 @@
             }
         },
         mounted() {
-            $('.slide').each(function () {
-                var slideLiW = $(".slide .time-list li").width()
-                var slideLiN = $(this).find(".time-list").find("li").length
-                var ulW = (slideLiW + 1) * slideLiN
-                $(".slide .slide-area").width(ulW)
-                $(".slide ul").width(ulW)
-            })
+
         },
         methods: {
             swiperShow(index) {

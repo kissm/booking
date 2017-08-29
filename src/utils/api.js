@@ -23,10 +23,10 @@ export default {
     getRoomInfo: (data) => {
         return new Promise((resolve, reject) => {
             instance.get('getRoomInfo', {
-                params: {
-                    business_id: data.business_id,
-                    room_id: data.room_id
-                }
+                // params: {
+                //     business_id: data.business_id,
+                //     room_id: data.room_id
+                // }
             }).then(response => {
                 let resData = response.data;
                 if (resData.code == 200) {
@@ -40,10 +40,10 @@ export default {
     getBookingDays: (data) => {
         return new Promise((resolve, reject) => {
             instance.get('getBookingDays', {
-                params: {
-                    business_id: data.business_id,
-                    place_type_id: data.place_type_id
-                }
+                // params: {
+                //     business_id: data.business_id,
+                //     place_type_id: data.place_type_id
+                // }
             }).then(response => {
                 let resData = response.data;
                 if (resData.code == 200) {
@@ -57,10 +57,10 @@ export default {
     getPlaceTimes: (data) => {
         return new Promise((resolve, reject) => {
             instance.get('getPlaceTimes', {
-                params: {
-                    business_id: data.business_id,
-                    place_type_id: data.place_type_id
-                }
+                // params: {
+                //     business_id: data.business_id,
+                //     place_type_id: data.place_type_id
+                // }
             }).then(response => {
                 let resData = response.data;
                 if (resData.code == 200) {
