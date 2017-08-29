@@ -20,8 +20,29 @@ export function addDate(date, days) {
     var date = new Date(date);
     date.setDate(date.getDate() + days);
     var m = "00" + (date.getMonth() + 1);
-    var mon = (m.length == 3) ? m.substr(1,2) : m.substr(2,2)
+    var mon = (m.length == 3) ? m.substr(1, 2) : m.substr(2, 2)
     var d = "00" + date.getDate();
-    var day = (d.length == 3) ? d.substr(1,2) : d.substr(2,2)
+    var day = (d.length == 3) ? d.substr(1, 2) : d.substr(2, 2)
     return date.getFullYear() + '-' + mon + '-' + day;
+}
+
+export function timetrans(time, min) {
+    //在当前时间的基础上加上min分钟
+    console.log(time)
+    console.log(min)
+    let h = parseInt(time.split(':')[0]);
+    let m = parseInt(time.split(':')[1]);
+    // let now = new Date(time);
+    // let h = now.getHours();
+    // let m = now.getMinutes();
+    let all = h * 60 + m + min;
+    h = parseInt(all / 60);
+    m = all - h * 60;
+    if (m < 10) {
+        m = "0" + m;
+    }
+    if (h < 10) {
+        h = "0" + h;
+    }
+    return h + ':' + m;
 }

@@ -15,174 +15,27 @@
                 <div class="top98">
                     <div class="CDList nowCon cl">
                         <ul class="CDname fl">
-                            <li>1号场</li>
-                            <li>2号场</li>
+                            <li v-for="room in rooms">{{room.name}}</li>
                         </ul>
                         <div class="slide" id="slide">
                             <div class="slide-area">
                                 <timebar></timebar>
-                                <ul class="item-list">
-                                    <li>
-                                        <input id="time_1" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_1" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
+                                <ul class="item-list" v-for="room in rooms">
+                                    <li v-for="item in room.rooms">
+                                        <div v-if="item.is_occupy === 0">
+                                            <input id="time_1" class="radio" name="shijian" type="checkbox">
+                                            <label for="time_1" class="trigger">
+                                                <p class="money">￥{{item.price}}</p>
+                                            </label>
+                                        </div>
+                                        <p v-else="item.is_occupy === 0" class="bggrey">已过期</p>
                                     </li>
-                                    <li>
-                                        <p class="bggrey">已过期</p>
-                                    </li>
-                                    <li>
-                                        <p class="bggrey">已过期</p>
-                                    </li>
-                                    <li>
-                                        <input id="time_2" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_2" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input id="time_3" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_3" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input id="time_4" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_4" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input id="time_5" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_5" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input id="time_6" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_6" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input id="time_7" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_7" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input id="time_8" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_8" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input id="time_9" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_9" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input id="time_10" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_10" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input id="time_11" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_11" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input id="time_12" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_12" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li class="itemList">
-                                        <input id="time_13" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_13" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                </ul>
-                                <ul class="item-list">
-                                    <li>
-                                        <input id="time_14" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_14" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        已过期
-                                    </li>
-                                    <li>
-                                        <p class="bggrey">已过期</p>
-                                    </li>
-                                    <li>
-                                        <input id="time_15" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_15" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input id="time_16" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_16" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input id="time_17" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_17" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input id="time_18" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_18" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input id="time_19" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_19" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <p class="bggrey">已过期</p>
-                                    </li>
-                                    <li>
-                                        <p class="bggrey">已过期</p>
-                                    </li>
-                                    <li>
-                                        <p class="bggrey">已过期</p>
-                                    </li>
-                                    <li>
-                                        <input id="time_20" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_20" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input id="time_21" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_21" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input id="time_22" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_22" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
-                                    <li class="itemList">
-                                        <input id="time_23" class="radio" name="shijian" type="checkbox">
-                                        <label for="time_23" class="trigger">
-                                            <p class="money">￥26</p>
-                                        </label>
-                                    </li>
+                                    <!--<li>-->
+                                        <!---->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                        <!--<p class="bggrey">已过期</p>-->
+                                    <!--</li>-->
                                 </ul>
                             </div>
                         </div>
@@ -204,13 +57,13 @@
                 <h3>基本信息</h3>
                 <ul class="text-list">
                     <li>
-                        场地信息<span>{{spotInfo.acreage}}㎡</span>
+                        场地信息<span>{{roomInfo.acreage}}㎡</span>
                     </li>
                     <li>
-                        可容纳<span>{{spotInfo.contain}}人</span>
+                        可容纳<span>{{roomInfo.contain}}人</span>
                     </li>
                     <li>
-                        收费标准<span>{{spotInfo.charge_mode | fee(spotInfo.price,spotInfo.unit)}}</span>
+                        收费标准<span>{{roomInfo.charge_mode | fee(roomInfo.price,roomInfo.unit)}}</span>
                     </li>
                 </ul>
                 <h3>现场图</h3>
@@ -272,14 +125,14 @@
 <script type="text/ecmascript-6">
     import datebar from '../components/dateBar.vue'
     import timebar from '../components/timeBar.vue'
-    import api from '../utils/api'
     import {MessageBox} from 'mint-ui'
+    import {mapGetters} from 'vuex'
     export default {
         data() {
             return {
                 swiper_tc: false,
-                spotInfo: {},
                 imgList: [],
+                room_id: '',
                 swiper: null,
                 certifyTc: false,
                 disable: false,
@@ -287,16 +140,6 @@
                 phone: '',
                 certifycode: '',
             }
-        },
-        created() {
-            let _this = this
-            // 从url获取信息
-            api.getRoomInfo().then(response => {
-                    this.spotInfo = response
-                    this.imgList = response.img
-                    console.log(this.spotInfo)
-                }
-            )
         },
         components: {
             datebar,
@@ -309,10 +152,25 @@
                 } else {
                     return this.imgList
                 }
-            }
+            },
+            ...mapGetters([
+                'roomInfo','rooms'
+            ])
         },
-        mounted() {
-
+        watch: {
+            roomInfo(val) {
+                this.imgList = val.img
+            },
+            rooms(val) {
+                this.room_id = val[0].id
+            },
+            room_id(val) {
+                let data = {
+                    business_id: this.$route.query.business_id,
+                    room_id: val
+                }
+                this.$store.dispatch('getRoomInfo', data)
+            }
         },
         methods: {
             swiperShow(index) {

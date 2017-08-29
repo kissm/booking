@@ -1,7 +1,8 @@
 <template>
     <div id="tabfirst" class="tab weekTab swiper-container1">
         <ul class="cl swiper-wrapper" style="height:auto;background:#357dc4;">
-            <li v-for="(date,index) in dateList" :class="[curDate === index ? 'nowpage':'', 'swiper-slide']" @click="selectDate(index)">
+            <li v-for="(date,index) in dateList" :class="[curDate === index ? 'nowpage':'', 'swiper-slide']"
+                @click="selectDate(index)">
                 <p>{{date.date | sub}}</p>
                 <a href="#">{{date.week | weekChinese}}</a>
             </li>
@@ -13,32 +14,48 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import api from '../utils/api'
-    import {addDate} from '../utils/date'
+    import {mapGetters} from 'vuex'
 
     export default {
         data() {
             return {
-                dateList: [],
-                curDate: 0
+                curDate: 0,
+                business_id: '',
+                place_type_id: ''
             }
         },
         created() {
-            api.getBookingDays().then(response => {
-                let days = response
-                let i = 0
-                let now = new Date()
-                for (days; days > 0; days--) {
-                    let now_day = new Date(addDate(now, i)).getDay()
-                    let now_date = addDate(now, i)
-                    this.dateList.push({
-                        week: now_day,
-                        date: now_date
-                    });
-                    i++
+            this.business_id = this.$route.query.business_id
+            this.place_type_id = this.$route.query.place_type_id
+            let data = {
+                business_id: this.business_id,
+                place_type_id: this.place_type_id
+            }
+            this.$store.dispatch('getDateList', data)
+            this.$store.dispatch('getPlaceTimes', data)
+        },
+        computed: {
+            ...mapGetters([
+                'dateList','rooms'
+            ]),
+        },
+        watch: {
+            dateList(val) {
+                let data = {
+                    business_id: this.business_id,
+                    date: val[this.curDate].date,
+                    place_type_id: this.place_type_id
                 }
-                console.log(this.dateList)
-            })
+                this.$store.dispatch('getRooms', data)
+            },
+            curDate(val) {
+                let data = {
+                    business_id: this.business_id,
+                    date: this.dateList[val].date,
+                    place_type_id: this.place_type_id
+                }
+                this.$store.dispatch('getRooms', data)
+            }
         },
         mounted() {
             let mySwiper = new Swiper('.swiper-container1', {
@@ -58,7 +75,7 @@
         },
         filters: {
             sub(val) {
-                return val.substr(5,5).replace('-','.')
+                return val.substr(5, 5).replace('-', '.')
             },
             weekChinese(val) {
                 switch (val) {
