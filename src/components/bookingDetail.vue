@@ -12,19 +12,13 @@
                     <ul class="item-list" v-for="room in rooms">
                         <li v-for="item in room.rooms">
                             <div v-if="item.is_occupy === 0">
-                                <input :id="'time_'+item.id" class="radio" name="shijian" type="checkbox">
+                                <input :id="'time_'+item.id" class="radio" name="shijian" type="checkbox" @click="select(item,room,$event)">
                                 <label :for="'time_'+item.id" class="trigger">
                                     <p class="money">￥{{item.price}}</p>
                                 </label>
                             </div>
                             <p v-else="item.is_occupy === 0" class="bggrey">已过期</p>
                         </li>
-                        <!--<li>-->
-                        <!---->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<p class="bggrey">已过期</p>-->
-                        <!--</li>-->
                     </ul>
                 </div>
             </div>
@@ -42,17 +36,14 @@
             return {
                 timeList: [],
                 room_id: '',
+                selectedList: []
             }
         },
         computed: {
             ...mapGetters([
-                'timeInfo','rooms'
+                'timeInfo','rooms','selectedDate'
             ])
         },
-//        mounted() {
-//            let height = window.screen.height * 0.32
-//            $('.CDList').height(height)
-//        },
         watch: {
             timeInfo(val) {
                 let start = parseInt(val.time_start)
@@ -85,6 +76,23 @@
         methods: {
             getRoomInfo(id) {
                 this.room_id = id
+            },
+            select(item,room,event) {
+                if(event.target.checked) {
+                    if(!this.selectedList.hasOwnProperty(room.name)) {
+                        this.$set(this.selectedList, room.name, []);
+                    }
+                    let data = {
+                        room_id: room.id,
+                        room_name: room.name,
+                        date: this.selectedDate.date
+                    }
+                    console.log(room)
+                    console.log(item)
+                    this.selectedList[room.name].push(data)
+                }
+                console.log(this.selectedList)
+//                this.$store.commit('setSelected', this.selectedList)
             }
         }
     }

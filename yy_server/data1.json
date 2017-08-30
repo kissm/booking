@@ -2,27 +2,27 @@
   "id": 1,
   "name": "测试1",
   "rooms":[{
-    "id": 1,
+    "id": 7,
     "is_occupy": 0,
     "is_enable": 1,
     "is_free": 1,
-    "price": 10,
+    "price": 5,
     "time_enable": 1,
     "charge_mode": 2
   },{
-    "id": 2,
+    "id": 8,
     "is_occupy": 0,
     "is_enable": 1,
     "is_free": 1,
-    "price": 10,
+    "price": 5,
     "time_enable": 1,
     "charge_mode": 2
   },{
-    "id": 3,
+    "id": 9,
     "is_occupy": 0,
     "is_enable": 1,
     "is_free": 1,
-    "price": 10,
+    "price": 5,
     "time_enable": 1,
     "charge_mode": 2
   }]
@@ -30,7 +30,7 @@
   "id": 2,
   "name": "测试2",
   "rooms":[{
-    "id": 4,
+    "id": 10,
     "is_occupy": 0,
     "is_enable": 1,
     "is_free": 1,
@@ -38,7 +38,7 @@
     "time_enable": 1,
     "charge_mode": 2
   },{
-    "id": 5,
+    "id": 11,
     "is_occupy": 0,
     "is_enable": 1,
     "is_free": 1,
@@ -46,7 +46,7 @@
     "time_enable": 1,
     "charge_mode": 2
   },{
-    "id": 6,
+    "id": 12,
     "is_occupy": 0,
     "is_enable": 1,
     "is_free": 1,

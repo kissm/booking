@@ -97,8 +97,8 @@
 <script type="text/ecmascript-6">
     import datebar from '../components/dateBar.vue'
     import bookingdetail from '../components/bookingDetail.vue'
-    import {MessageBox} from 'mint-ui'
-    import {mapGetters} from 'vuex'
+    import { MessageBox, Toast } from 'mint-ui'
+    import { mapGetters } from 'vuex'
     export default {
         data() {
             return {
@@ -125,7 +125,7 @@
                 }
             },
             ...mapGetters([
-                'roomInfo'
+                'roomInfo','selected'
             ])
         },
         watch: {
@@ -149,8 +149,15 @@
                 this.swiper.destroy(false, true)
             },
             booking() {
-                if (true) { // 如果已经选择了场地
+                if (this.selected.length > 0) { // 如果已经选择了场地
                     this.certifyTc = true
+                } else {
+                    Toast({
+                        message: '请先选择预定的时间',
+                        position: 'middle',
+                        duration: 2000
+                    })
+                    return false
                 }
             },
             certifyTcHide() {

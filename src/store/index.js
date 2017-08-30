@@ -6,15 +6,20 @@ import Vuex from 'vuex'
 import route from '../router'
 import api from '../utils/api'
 import {addDate} from '../utils/date'
+import createLogger from '../utils/logger'
 
 Vue.use(Vuex)
 
+const debug = process.env.NODE_ENV !== 'production'
+
 export default new Vuex.Store({
     state: {
-        dateList: [],
-        rooms: [],
-        roomInfo: '',
-        timeInfo: ''
+        dateList: [], // 可提前预约的日期列表
+        rooms: [], // 各场地及预定详情
+        roomInfo: '',  // 场地基本信息
+        timeInfo: '',  // 时间表
+        selectedDate: '',// 用户选择的日期
+        selected: []  // 用户选择的预定时间
     },
     mutations: {
         getDates(state, data) {
@@ -28,13 +33,22 @@ export default new Vuex.Store({
         },
         getTimeInfo(state, data) {
             state.timeInfo = data
+        },
+        setSelectedDate(state, data) {
+            state.selectedDate = data
+        },
+        setSelected(state, data) {
+          state.selected = []
+          state.selected = data
         }
     },
     getters: {
         dateList: (state) => state.dateList,
         rooms: (state) => state.rooms,
         roomInfo: (state) => state.roomInfo,
-        timeInfo: (state) => state.timeInfo
+        timeInfo: (state) => state.timeInfo,
+        selected: (state) => state.selected,
+        selectedDate: (state) => state.selectedDate
     },
     actions: {
         getDateList({commit}) {
@@ -62,7 +76,8 @@ export default new Vuex.Store({
         getRooms({commit}, date) {
             let data = {
                 id: route.currentRoute.query.id,
-                date: date,
+                date: date.date,
+                week: date.week,
                 place_type_id: route.currentRoute.query.place_type_id
             }
             api.getRooms(data).then(response => {
