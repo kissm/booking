@@ -49,6 +49,10 @@
                 'timeInfo','rooms'
             ])
         },
+//        mounted() {
+//            let height = window.screen.height * 0.32
+//            $('.CDList').height(height)
+//        },
         watch: {
             timeInfo(val) {
                 let start = parseInt(val.time_start)
@@ -68,8 +72,7 @@
                     let slideLiW = $(".slide .time-list li").width()
                     let slideLiN = _this.timeList.length
                     let ulW = (slideLiW + 1) * slideLiN
-                    $(".slide .slide-area").width(ulW)
-                    $(".slide ul.item-list").width(ulW - 44)
+                    $(".slide .slide-area .time-list").width(ulW)
                 })
             },
             rooms(val) {
