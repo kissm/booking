@@ -77,6 +77,7 @@ export default {
                 params: {
                     id: data.id,
                     date: data.date,
+                    week: data.week,
                     place_type_id: data.place_type_id
                 }
             }).then(response => {

@@ -186,7 +186,7 @@ i.position-ico2{width:16px;height:36px;background:url(../img/iconfont-weizhi_xia
 .slide .time-list li:after{content:"";position:absolute;bottom:0;left:0;width:10px;height:10px;background:url(../img/bg_sanjiaoxing_hui.png) no-repeat center center;background-size:100%;}
 .slide .time-list li{text-align:left;font-size:14px;}
 .slide ul.item-list{border-left:1px solid #dbdbdb;}
-.slide ul.item-list:last-child{border-bottom:1px solid #dbdbdb;}
+/*.slide ul.item-list:last-child{border-bottom:1px solid #dbdbdb;}*/
 .item-list li{height:44px;float:left;width:45px;box-sizing: border-box;border-right:1px solid #dbdbdb;border-top:1px solid #dbdbdb;position:relative;}
 .item-list li p{width:44px;height:44px;box-sizing: border-box;}
 .item-list .radio { display:none; }

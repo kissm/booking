@@ -45,8 +45,8 @@ appRoutes.get('/getPlaceTimes', function (req, res) {
     status: 'success',
     msg: 'ok',
     data: {
-      time_start: '16:00',
-      time_end: '22:00',
+      time_start: '17:00',
+      time_end: '20:00',
       unit: 60
     },
     code: 200,
@@ -54,14 +54,25 @@ appRoutes.get('/getPlaceTimes', function (req, res) {
   })
 })
 var data = require('./data.json')
+var data1 = require('./data1.json')
 appRoutes.get('/getRooms', function (req, res) {
-  res.json({
-    status: 'success',
-    msg: 'ok',
-    data: data,
-    code: 200,
-    referrer: ''
-  })
+    if(req.query.date === '2017-08-30') {
+        res.json({
+            status: 'success',
+            msg: 'ok',
+            data: data,
+            code: 200,
+            referrer: ''
+        })
+    } else {
+        res.json({
+            status: 'success',
+            msg: 'ok',
+            data: data1,
+            code: 200,
+            referrer: ''
+        })
+    }
 })
 
 module.exports = appRoutes

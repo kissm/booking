@@ -2,9 +2,9 @@
     <div id="tabfirst" class="tab weekTab swiper-container1">
         <ul class="cl swiper-wrapper" style="height:auto;background:#357dc4;">
             <li v-for="(date,index) in dateList" :class="[curDate === index ? 'nowpage':'', 'swiper-slide']"
-                @click="selectDate(index)">
+                @click="selectDate(index,date)">
                 <p>{{date.date | sub}}</p>
-                <a href="#">{{date.week | weekChinese}}</a>
+                <a>{{date.week | weekChinese}}</a>
             </li>
         </ul>
         <!-- 如果需要导航按钮 -->
@@ -32,10 +32,12 @@
         },
         watch: {
             dateList(val) {
-                this.$store.dispatch('getRooms', val[this.curDate].date)
+                this.$store.dispatch('getRooms', val[this.curDate])
+                this.$store.commit('setSelectedDate',val[this.curDate])
             },
             curDate(val) {
-                this.$store.dispatch('getRooms', this.dateList[val].date)
+                this.$store.dispatch('getRooms', this.dateList[val])
+                this.$store.commit('setSelectedDate',this.dateList[val])
             }
         },
         mounted() {
@@ -50,8 +52,8 @@
             });
         },
         methods: {
-            selectDate(index) {
-                this.curDate = index;
+            selectDate(index,date) {
+                this.curDate = index
             }
         },
         filters: {
