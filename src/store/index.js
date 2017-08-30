@@ -6,7 +6,7 @@ import Vuex from 'vuex'
 import route from '../router'
 import api from '../utils/api'
 import {addDate} from '../utils/date'
-import createLogger from '../utils/logger'
+// import createLogger from '../utils/logger'
 
 Vue.use(Vuex)
 

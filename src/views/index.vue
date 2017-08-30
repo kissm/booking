@@ -19,20 +19,6 @@
   			<p>开放时间：9:00-24:00</p>
   		</a>
   	</div>
-  	<div class="qiuc">
-  		<img src="../assets/img/CDyuMao.png">
-  		<a class="changdi" href="booking">
-  			<h3>篮球场</h3>
-  			<p>开放时间：9:00-24:00</p>
-  		</a>
-  	</div>
-  	<div class="qiuc">
-  		<img src="../assets/img/CDpingP.png">
-  		<a class="changdi" href="booking">
-  			<h3>瑜伽房</h3>
-  			<p>开放时间：9:00-24:00</p>
-  		</a>
-  	</div>
   </div>
   <!--main-->
 </div>
