@@ -19,9 +19,17 @@ export default new Vuex.Store({
         roomInfo: '',  // 场地基本信息
         timeInfo: '',  // 时间表
         selectedDate: '',// 用户选择的日期
-        selected: []  // 用户选择的预定时间
+        selected: [], // 用户选择的预定时间
+        spotList: [],
+        placeList:[],
     },
     mutations: {
+        getPlace(state, data) {
+            state.spotList = data
+        },
+        getPlaceType(state, data) {
+            state.placeList = data
+        },
         getDates(state, data) {
             state.dateList = data
         },
@@ -43,6 +51,8 @@ export default new Vuex.Store({
         }
     },
     getters: {
+        spotList: (state) => state.spotList,
+        placeList: (state) => state.placeList,
         dateList: (state) => state.dateList,
         rooms: (state) => state.rooms,
         roomInfo: (state) => state.roomInfo,
@@ -51,6 +61,19 @@ export default new Vuex.Store({
         selectedDate: (state) => state.selectedDate
     },
     actions: {
+        getPlace({commit}) {
+            api.getPlace().then(response => {
+                commit('getPlace', response)
+            })
+        },
+        getPlaceType({commit}) {
+            let data = {
+                id: route.currentRoute.query.id,
+            }
+            api.getPlaceType(data).then(response => {
+                commit('getPlaceType', response)
+            })
+        },
         getDateList({commit}) {
             let data = {
                 id: route.currentRoute.query.id,

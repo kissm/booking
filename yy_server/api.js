@@ -12,12 +12,69 @@ appRoutes.get('/getPlace', function (req, res) {
         data: [
             {
               id:1,
+                name:"恒生科技园",
+                introduce:"恒生科技园，大大大大大",
+                address:"文一西路",
+                mobile:"15965698956",
+                img:'../static/timg.jpg'
             },
             {
-              id:2
+              id:2,
+                name:"利尔达",
+                introduce:"利尔达科技园，大大大大大",
+                address:"文一西路",
+                mobile:"15965645956",
+                img:'../static/cd.png'
             }
         ]
     })
+})
+appRoutes.get('/getPlaceType', function (req, res) {
+    if(req.query.id == 1) {
+        res.json({
+            status: 'success',
+            msg: 'ok',
+            code: 200,
+            data: [
+                {
+                    id:1,
+                    name:"恒生科技园",
+                    introduce:"恒生科技园，大大大大大",
+                    address:"文一西路",
+                    mobile:"15965698956",
+                },
+                // {
+                //   id:2,
+                //     name:"利尔达",
+                //     introduce:"利尔达科技园，大大大大大",
+                //     address:"文一西路",
+                //     mobile:"15965645956",
+                // }
+            ]
+        })
+    }else{
+        res.json({
+            status: 'success',
+            msg: 'ok',
+            code: 200,
+            data: [
+                {
+                    id:1,
+                    name:"恒生",
+                    introduce:"恒生科技园，大大大大大",
+                    address:"文一西路",
+                    mobile:"15965698956",
+                },
+                // {
+                //   id:2,
+                //     name:"利尔达",
+                //     introduce:"利尔达科技园，大大大大大",
+                //     address:"文一西路",
+                //     mobile:"15965645956",
+                // }
+            ]
+        })
+    }
 })
 appRoutes.get('/getRoomInfo', function (req, res) {
   if(req.query.room_id == 1) {

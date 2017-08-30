@@ -10,44 +10,20 @@
   <!--header 结束-->  
   <!--main-->
   <div class="main">
-  	<a class="main-item" href="index">
+  	<a class="main-item" :href="'index?id='+spot.id" v-for="spot in spotList">
       <div class="main-img">
-      	<img src="../assets/img/cd.png">
+      	<img :src=spot.img>
       	<p class="CDphone">
-      		<span class="name">利尔达物联网科技园</span>
-      		<i class="phone-ico"></i>
+      		<span class="name">{{spot.name}}</span>
+      		<a class="phone-ico" :href="'tel:'+spot.mobile"></a>
       	</p>
       </div>
       <div class="CDmessage">
       	<p>
-      		<i class="time-ico"></i>
-      		<span><em>08:30-21:00</em></span>
-      	</p>
-      	<p>
       		<i class="position-ico"></i>
-      		<span>利尔达物联网科技园2号楼2楼201室</span>
+      		<span style="display: inline">{{spot.address}}</span>
       	</p>
-      	<p class="text">描述内容：描述内容</p>
-      </div>
-    </a>
-    <a class="main-item" href="index">
-      <div class="main-img">
-      	<img src="../assets/img/timg.jpg">
-      	<p class="CDphone">
-      		<span class="name">杭师大仓前校区</span>
-      		<i class="phone-ico"></i>
-      	</p>
-      </div>
-      <div class="CDmessage">
-      	<p>
-      		<i class="time-ico"></i>
-      		<span><em>08:30-21:00</em></span>
-      	</p>
-      	<p>
-      		<i class="position-ico"></i>
-      		<span>杭师大仓前校区3号楼</span>
-      	</p>
-      	<p class="text">场地宽敞，价格美丽，环境舒适</p>
+      	<p class="text">{{spot.introduce}}</p>
       </div>
     </a>
   </div>
@@ -64,6 +40,7 @@
             }
         },
         created(){
+            this.$store.dispatch('getPlace');
 
         },
         mounted(){
@@ -75,6 +52,7 @@
             ...mapGetters([
                 'spotList'
             ]),
+
         },
         methods:{
 

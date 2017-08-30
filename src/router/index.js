@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import api from '../utils/api'
+import {MessageBox} from 'mint-ui'
 
 Vue.use(Router)
 
@@ -9,7 +11,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect:'index'
+            redirect:'spot'
         },
         {
             path: '/index',
@@ -19,6 +21,7 @@ export default new Router({
         {
             path: '/spot',
             name: 'spot',
+            beforeEnter: check,
             component: require('../views/spot.vue')
         },
         {
@@ -44,3 +47,16 @@ export default new Router({
     ]
 })
 
+function check(to, from, next) {
+    api.getPlace().then(response => {
+        console.log(response[0].id)
+        if (response.length >1) {
+            next();
+        } else {
+            window.location.href = '/booking/index?id='+response[0].id;
+        }
+    },error => {
+        MessageBox.alert('接口调用失败', "提示", {customClass: 'alert'});
+    });
+
+}

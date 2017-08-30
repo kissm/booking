@@ -9,7 +9,7 @@ import {MessageBox} from 'mint-ui'
 //     headers: {'Authorization': 'Bearer '+ Laravel.token, 'HOTEL' : Laravel.hotel_id},
 // });
 const instance = axios.create({
-    baseURL: 'http://10.200.0.212:8088/api/'
+    baseURL: 'http://localhost:8088/api/'
 });
 // 拦截接口调用失败的情况
 instance.interceptors.response.use(function (response) {
@@ -23,10 +23,22 @@ export default {
     getPlace: (data) => {
         return new Promise((resolve, reject) => {
             instance.get('getPlace', {
-                // params: {
-                //     business_id: data.business_id,
-                //     room_id: data.room_id
-                // }
+            }).then(response => {
+                let resData = response.data;
+                if (resData.code == 200) {
+                    resolve(resData.data);
+                } else {
+                    MessageBox.alert(resData.msg, "提示");
+                }
+            });
+        })
+    },
+    getPlaceType: (data) => {
+        return new Promise((resolve, reject) => {
+            instance.get('getPlaceType', {
+                params: {
+                    id: data.id,
+                }
             }).then(response => {
                 let resData = response.data;
                 if (resData.code == 200) {

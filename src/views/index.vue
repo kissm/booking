@@ -40,6 +40,7 @@
 
 <script>
     import api from '../utils/api'
+    import {mapGetters} from 'vuex'
     export default {
         data(){
             return{
@@ -47,14 +48,23 @@
 			}
 		},
 		created(){
-            this.show();
+            this.$store.dispatch('getPlaceType');
+
 		},
+		mounted(){
+            $(document).ready(function(){
+                $(".qiuc").addClass("hover");
+            });
+		},
+        computed: {
+            ...mapGetters([
+                'placeList'
+            ]),
+
+        },
 		methods:{
-		    show:function () {
-                $(document).ready(function(){
-					$(".qiuc").addClass("hover");
-				});
-            }
+
+
 		}
 	}
 
